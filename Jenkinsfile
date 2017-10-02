@@ -15,9 +15,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'INFO: Deploymnet Step....'
-                echo 'INFO: Executing Ansible Playbook...'
-            /Users/Git/jenkinks-repo/playbooks/ansible-playbook -i /Users/Git/jenkinks-repo/hosts /Users/Git/jenkinks-repo/playbooks/playbook1.yml
-                echo 'INFO: Finish execution of Ansible Playbook...'
             }
         }
     }
