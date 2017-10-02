@@ -3,6 +3,11 @@ pipeline {
     parameters {
         string(name: 'username_', defaultValue: '<blank>', description: 'you required to provide your id')
     }
+    parameters {
+        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
+        // choices are newline separated
+        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
+    }
     stages {
         stage('Setup') {
             steps {
@@ -12,6 +17,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'INFO: Building..'
+                // ??
+                sh "echo ${params.region}"
             }
         }
         stage('Test') {
@@ -22,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'INFO: Deploymnet Step....'
-                echo 'INFO: `date` Start of Ansible playbook'
+                echo 'INFO: " date " Start of Ansible playbook'
                 ansiblePlaybook installation: 'ansible 2.4.0.0', inventory: '/Users/Git/jenkinks-repo/hosts', playbook: '/Users/Git/jenkinks-repo/playbooks/playbook1.yml', sudoUser: null
 
             }
