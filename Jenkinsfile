@@ -2,8 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'username_', defaultValue: '<blank>', description: 'you required to provide your id')
-    }
-    parameters {
+
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         // choices are newline separated
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
