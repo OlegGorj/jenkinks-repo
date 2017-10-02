@@ -15,6 +15,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'INFO: Deploymnet Step....'
+                echo 'INFO: '
+                ansible --version
             }
         }
     }
