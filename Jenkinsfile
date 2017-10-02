@@ -1,11 +1,12 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'username_', defaultValue: '<blank>', description: 'you required to provide your id')
+        string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
 
-        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
-        // choices are newline separated
-        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
+        //string(defaultValue: "", description: 'What environment?', name: 'env_')
+        choice(choices: 'DEV\nQA\nSTG\nPRD', description: 'What environment?', name: 'env_')
+
+        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
     }
     stages {
         stage('Setup') {
@@ -16,8 +17,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'INFO: Building..'
-                // ??
-                sh "echo ${params.region}"
+                sh "echo 'User: ' ${params.username_}"
+                sh "echo 'Region: ' ${params.region}"
+                sh "echo 'Env: ' ${params.env_}"
             }
         }
         stage('Test') {
@@ -28,7 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'INFO: Deploymnet Step....'
-                echo 'INFO: " date " Start of Ansible playbook'
+                echo 'INFO: Start of Ansible playbook'
                 ansiblePlaybook installation: 'ansible 2.4.0.0', inventory: '/Users/Git/jenkinks-repo/hosts', playbook: '/Users/Git/jenkinks-repo/playbooks/playbook1.yml', sudoUser: null
 
             }
