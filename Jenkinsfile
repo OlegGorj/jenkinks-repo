@@ -11,6 +11,29 @@ pipeline {
         stage('Setup') {
             steps {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                
+                script {
+                    MYLIST = []
+                    MYLIST += "param-one"
+                    MYLIST += "param-two"
+                    MYLIST += "param-three"
+                    MYLIST += "param-four"
+                    MYLIST += "param-five"
+
+                    for (def element = 0; element < MYLIST.size(); element++) {
+                        build(
+                            job: 'parameterized-job',
+                            parameters: [
+                                [
+                                    $class: 'StringParameterValue',
+                                    name: 'MYLIST',
+                                    value: MYLIST[element]
+                                ]
+                            ]
+                        )
+                    }
+                }
+                
             }
         }
         stage('Build') {
