@@ -1,10 +1,9 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
-
-        //string(defaultValue: "", description: 'What environment?', name: 'env_')
         choice(choices: 'DEV\nQA\nSTG\nPRD', description: 'What environment?', name: 'env_')
+
+        string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
 
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
     }
@@ -18,7 +17,7 @@ pipeline {
             steps {
                 echo 'INFO: Building..'
                 sh "echo 'User: ' ${params.username_}"
-                sh "echo 'Region: ' ${params.region}"
+                sh "echo 'Region: ' ${params.region_}"
                 sh "echo 'Env: ' ${params.env_}"
             }
         }
