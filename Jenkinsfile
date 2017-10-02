@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'username_', defaultValue: '<blank>', description: 'you required to provide your id')
+    }
     stages {
         stage('Setup') {
             steps {
