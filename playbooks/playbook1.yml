@@ -5,10 +5,11 @@
 #     contents: "{{ lookup('file', '/etc/foo.txt') }}"
 
   tasks:
-    - name: Print external parameter
+    - name: Print external parameters
       debug: msg="Region is {{Region}}"
+      debug: msg="Environment is {{Environment}}"
 
-    - debug: msg="User in integration is {{ lookup('ini', 'user section=integration file=users.ini' ) }}"
+    - debug: msg="User Init in integration section is {{ lookup('ini', 'user section=integration file=users.ini' ) }}"
 
     - name: Home environment variable
       debug: msg="{{ lookup('env','HOME') }} is an environment variable"
