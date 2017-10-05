@@ -5,8 +5,8 @@
 #     contents: "{{ lookup('file', '/etc/foo.txt') }}"
 
   tasks:
-    - name: Task name 1
-      command: 'ls -ltr'
+    - name: Print external parameter
+      debug: msg="Region is {{Region}}"
 
     - debug: msg="User in integration is {{ lookup('ini', 'user section=integration file=users.ini' ) }}"
 
