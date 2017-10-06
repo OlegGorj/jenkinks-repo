@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'INFO: Building..'
                 sh "echo 'User: ' ${params.username_}"
-                sh "echo 'Region: ' ${params.region}"
+                sh "echo 'Region: ' ${params.Region}"
                 sh "echo 'Env: ' ${params.env_}"
             }
         }
