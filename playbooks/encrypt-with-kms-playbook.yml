@@ -1,5 +1,5 @@
 ---
-- name: Encrypt with KMS play
+- name: Encrypt with KMS
   hosts: local-servers
 #    vars:
 #     contents: "{{ lookup('file', '/etc/foo.txt') }}"
@@ -14,10 +14,12 @@
 
     - name: List of files in dir
       debug: msg="{{ item }} "
-      with_lines: ls -l /var/logs
+      with_lines: ls -l /Users/Git
 
     - name: List of file by using shell command
-      shell: "ls -ltr"
+      shell: "ls -ltr /Users/Git"
+      register: listof_users_git
+    - debug: var=listof_users_git.stdout
 
     - name: register output of whoami command
       command: whoami

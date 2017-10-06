@@ -5,7 +5,7 @@ pipeline {
 
         string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
 
-        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
+        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'Region')
     }
     stages {
         stage('Setup') {
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo 'INFO: Building..'
                 sh "echo 'User: ' ${params.username_}"
-                sh "echo 'Region: ' ${params.region_}"
+                sh "echo 'Region: ' ${params.region}"
                 sh "echo 'Env: ' ${params.env_}"
             }
         }
