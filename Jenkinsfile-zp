@@ -36,7 +36,7 @@ pipeline {
                 echo 'INFO: Deploymnet Step....'
                 echo 'INFO: Start of Ansible playbook'
 
-                ansiblePlaybook('/playbooks/playbook1.yml') {
+                ansiblePlaybook('playbooks/playbook1.yml') {
                   inventoryPath('hosts')
                   ansibleName('ansible 2.4.0.0')
                   sudo(false)
