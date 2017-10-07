@@ -36,16 +36,11 @@ pipeline {
                 echo 'INFO: Deploymnet Step....'
                 echo 'INFO: Start of Ansible playbook'
 
-                ansiblePlaybook('playbooks/playbook1.yml') {
-                  inventoryPath('hosts')
-                  ansibleName('ansible 2.4.0.0')
-                  sudo(false)
-                  extraVars {
-                      extraVar("key1", "value1", false)
-                      extraVar("key2", "value2", true)
-                  }
-                }
 
+                ansiblePlaybook(
+                    playbook: 'playbooks/zeoppelin-deploy-playbook.yml',
+                    inventory: 'inventory/hosts',
+                    extras: '-e parameter="some value"')
 
             }
 
