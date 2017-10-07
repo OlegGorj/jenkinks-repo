@@ -12,13 +12,6 @@
     - name: Home environment variable
       debug: msg="{{ lookup('env','HOME') }} is an environment variable"
 
-    - name: List of files in dir
-      debug: msg="{{ item }} "
-      with_lines: ls -l /var/logs
-
-    - name: List of file by using shell command
-      shell: "ls -ltr"
-
     - name: register output of whoami command
       command: whoami
       register: login
