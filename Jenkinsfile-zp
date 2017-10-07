@@ -40,7 +40,7 @@ pipeline {
                 ansiblePlaybook(
                     playbook: 'playbooks/zeoppelin-deploy-playbook.yml',
                     inventory: 'inventory/hosts',
-                    extras: '-e Region=${Region}')
+                    extras: '-e Region=${Region} Environment=${env_}')
 
             }
 
