@@ -35,9 +35,18 @@ pipeline {
             steps {
                 echo 'INFO: Deploymnet Step....'
                 echo 'INFO: Start of Ansible playbook'
-                ansiblePlaybook installation: 'ansible 2.4.0.0', inventory: '/Users/Git/jenkinks-repo/hosts', playbook: '/Users/Git/jenkinks-repo/playbooks/playbook1.yml', sudoUser: null
 
+                ansiblePlaybook('/Users/Git/jenkinks-repo/playbooks/playbook1.yml') {
+                  inventoryPath('/Users/Git/jenkinks-repo/hosts')
+                  ansibleName('ansible 2.4.0.0')
+                  sudo(false)
+                  extraVars {
+                      extraVar("key1", "value1", false)
+                      extraVar("key2", "value2", true)
+                  }
+                }
             }
+
         }
     }
 }
