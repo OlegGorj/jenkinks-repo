@@ -1,0 +1,7 @@
+
+[servers]
+localhost
+SparkMacBookpro.local
+
+[local-servers]
+localhost

@@ -1,0 +1,26 @@
+---
+- name: Encrypt with KMS play
+  hosts: local-servers
+#    vars:
+#     contents: "{{ lookup('file', '/etc/foo.txt') }}"
+
+  tasks:
+    - debug: msg="Region is {{Region}}"
+    - debug: msg="Environment is {{Environment}}"
+    - debug: msg="User Init in integration section is {{ lookup('ini', 'user section=integration file=../init/users.ini' ) }}"
+
+    - name: Home environment variable
+      debug: msg="{{ lookup('env','HOME') }} is an environment variable"
+
+    - name: List of files in dir
+      debug: msg="{{ item }} "
+      with_lines: ls -l /var/logs
+
+    - name: List of file by using shell command
+      shell: "ls -ltr"
+
+    - name: register output of whoami command
+      command: whoami
+      register: login
+    - debug: var=login.stdout
+    - debug: msg="output of whoami command is {{login.stdout}}"
