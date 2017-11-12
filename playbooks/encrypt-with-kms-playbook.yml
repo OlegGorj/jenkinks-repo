@@ -9,8 +9,8 @@
     - debug: msg="Environment is {{Environment}}"
     - debug: msg="User Init in integration section is {{ lookup('ini', 'user section=integration file=../init/users.ini' ) }}"
 
-    - name: Home environment variable
-      debug: msg="{{ lookup('env','HOME') }} is an environment variable"
+#    - name: Home environment variable
+#      debug: msg="{{ lookup('env','HOME') }} is an environment variable"
 
     - name: List of files in dir
       debug: msg="{{ item }} "
@@ -19,7 +19,7 @@
     - name: List of file by using shell command
       shell: "ls -ltr /Users/Git"
       register: listof_users_git
-    - debug: var=listof_users_git.stdout
+#    - debug: var=listof_users_git.stdout
 
     - name: register output of whoami command
       command: whoami
