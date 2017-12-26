@@ -15,7 +15,7 @@
 
     - name: List of files in dir
       debug: msg="{{ item }} "
-      with_lines: ls -l /var/logs
+      with_lines: ls -l /Users/Git
 
     - name: List of file by using shell command
       shell: "ls -ltr"
