@@ -5,9 +5,9 @@
 #     contents: "{{ lookup('file', '/etc/foo.txt') }}"
 
   tasks:
-    - debug: msg="Name of the user is {{username_}}"
-    - debug: msg="Region is {{Region_}}"
-    - debug: msg="Environment is {{Environment_}}"
+    - debug: msg="Name of the user is {{Username}}"
+    - debug: msg="Region is {{Region}}"
+    - debug: msg="Environment is {{Environment}}"
     - debug: msg="User Init in integration section is {{ lookup('ini', 'user section=integration file=../init/users.ini' ) }}"
 
     - name: Home environment variable
