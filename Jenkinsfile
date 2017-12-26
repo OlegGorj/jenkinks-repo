@@ -22,8 +22,8 @@ pipeline {
             steps {
                 echo 'INFO: Building..'
                 sh "echo 'User: ' ${params.username_}"
-                sh "echo 'Region: ' ${params.Region}"
-                sh "echo 'Env: ' ${params.env_}"
+                sh "echo 'Region: ' ${params.Region_}"
+                sh "echo 'Env: ' ${params.Environment_}"
             }
         }
         stage('Test') {
