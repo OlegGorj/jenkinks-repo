@@ -1,5 +1,5 @@
 ---
-- name: Encrypt with KMS play
+- name: Test Ansible Playbook
   hosts: local-servers
 #    vars:
 #     contents: "{{ lookup('file', '/etc/foo.txt') }}"
