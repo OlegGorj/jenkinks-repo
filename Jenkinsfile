@@ -40,7 +40,6 @@ pipeline {
                   playbook: 'playbooks/playbook1.yml',
                   inventory: 'inventory/hosts',
                   ansibleName('ansible 2.4.0.0')
-                  sudo(false)
                   extras: '-e Region=${region_} -e Environment=${env_} -e Username=${username_}'
                   )
 
