@@ -14,6 +14,10 @@ pipeline {
         string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
 
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
+
+
+
+
     }
     options {
         buildDiscarder(logRotator(numToKeepStr:'20'))
@@ -35,18 +39,26 @@ pipeline {
                 }
                 echo "${env.RELEASE_SCOPE}"
 
-                def userInput = input(
-                    id: 'userInput', message: 'input parameters', parameters: [
-                        [
-                            $class: 'ChoiceParameterDefinition',
-                            name: 'ami',
-                            choices: findAMIs(),
-                            description: 'AMI',
-                        ],
-                    ]
-                )
+                script {
+                    env.RELEASE_AMI = input message: 'Select your AMI', ok: 'Release!',
+                            parameters: [
+                            choice(name: 'RELEASE_AMI', choices: findAMIs(), description: 'What is the AMI?')
+                            ]
+                }
+                echo "${env.RELEASE_AMI}"
 
-                echo ("Selected AMI :: "+userInput)
+//                def userInput = input(
+//                    id: 'userInput', message: 'input parameters', parameters: [
+//                        [
+//                            $class: 'ChoiceParameterDefinition',
+//                            name: 'ami',
+//                            choices: findAMIs(),
+//                            description: 'AMI',
+//                        ],
+//                    ]
+//                )
+//
+//                echo ("Selected AMI :: "+userInput)
 
             }
         }
