@@ -1,5 +1,7 @@
 pipeline {
+
     agent any
+
     parameters {
         choice(choices: 'DEV\nQA\nSTG\nPRD', description: 'The environment?', name: 'env_')
 
@@ -7,10 +9,28 @@ pipeline {
 
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr:'20'))
+        timestamps()
+        timeout(time: 90, unit: 'MINUTES')
+    }
+//    environment {
+//    }
+
     stages {
         stage('Setup') {
             steps {
+
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+
+                script {
+                    env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
+                            parameters: [
+                            choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')
+                            ]
+                }
+                echo "${env.RELEASE_SCOPE}"
+
             }
         }
         stage('Sanity check') {
