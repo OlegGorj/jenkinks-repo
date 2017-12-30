@@ -15,6 +15,7 @@ pipeline {
 
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
 
+        choice(aminame: 'RELEASE_AMI', choices: findAMIs(), description: 'What is the AMI?')
 
 
 
@@ -46,19 +47,6 @@ pipeline {
                             ]
                 }
                 echo "${env.RELEASE_AMI}"
-
-//                def userInput = input(
-//                    id: 'userInput', message: 'input parameters', parameters: [
-//                        [
-//                            $class: 'ChoiceParameterDefinition',
-//                            name: 'ami',
-//                            choices: findAMIs(),
-//                            description: 'AMI',
-//                        ],
-//                    ]
-//                )
-//
-//                echo ("Selected AMI :: "+userInput)
 
             }
         }
