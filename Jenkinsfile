@@ -15,7 +15,7 @@ pipeline {
 
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
 
-        choice(aminame: 'RELEASE_AMI', choices: findAMIs(), description: 'What is the AMI?')
+        choice(name: 'RELEASE_AMI', choices: findAMIs(), description: 'What is the AMI?')
 
 
 
