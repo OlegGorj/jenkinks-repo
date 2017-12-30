@@ -5,3 +5,7 @@ SparkMacBookpro.local
 
 [local-servers]
 localhost
+
+[dev-servers]
+localhost-dev-1
+localhost-dev-2

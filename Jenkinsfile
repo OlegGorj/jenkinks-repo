@@ -15,12 +15,12 @@ pipeline {
         }
         stage('Sanity check') {
              steps {
-                 input "Does the environment  ${params.env_} look ok?"
+//                 input "Does the environment  ${params.env_} look ok?"
              }
         }
         stage('Build') {
             steps {
-                echo 'INFO: Building..'
+                echo 'INFO: Building....'
                 sh "echo 'User: ' ${params.username_}"
                 sh "echo 'Region: ' ${params.region_}"
                 sh "echo 'Env: ' ${params.env_}"
@@ -44,4 +44,23 @@ pipeline {
         }
 
     }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
+
 }
