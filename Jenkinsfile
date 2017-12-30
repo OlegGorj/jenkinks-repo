@@ -36,6 +36,8 @@ pipeline {
         stage('Sanity check') {
              steps {
 //                 input "Does the environment  ${params.env_} look ok?"
+              echo 'INFO: Sanity checks.....'
+
              }
         }
         stage('Build') {
