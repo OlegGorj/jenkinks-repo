@@ -1,9 +1,15 @@
+
+def findAMIs() {
+    return UUID.randomUUID().toString().split('-').join('\n')
+}
+
+
 pipeline {
 
     agent any
 
     parameters {
-        choice(choices: 'DEV\nQA\nSTG\nPRD', description: 'The environment?', name: 'env_')
+        choice(choices: 'DEV\nQA\nSTG\nPRD', description: 'The environment?', name: 'environment_')
 
         string(name: 'username_', defaultValue: 'defaultuser', description: 'you required to provide your id')
 
@@ -14,14 +20,12 @@ pipeline {
         timestamps()
         timeout(time: 90, unit: 'MINUTES')
     }
-//    environment {
-//    }
 
     stages {
         stage('Setup') {
             steps {
 
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+//                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 
                 script {
                     env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
@@ -31,13 +35,25 @@ pipeline {
                 }
                 echo "${env.RELEASE_SCOPE}"
 
+                def userInput = input(
+                    id: 'userInput', message: 'input parameters', parameters: [
+                        [
+                            $class: 'ChoiceParameterDefinition',
+                            name: 'ami',
+                            choices: findAMIs(),
+                            description: 'AMI',
+                        ],
+                    ]
+                )
+
+                echo ("Selected AMI :: "+userInput)
+
             }
         }
         stage('Sanity check') {
              steps {
-//                 input "Does the environment  ${params.env_} look ok?"
+//                 input "Does the environment  ${params.environment_} look ok?"
               echo 'INFO: Sanity checks.....'
-
              }
         }
         stage('Build') {
@@ -45,7 +61,7 @@ pipeline {
                 echo 'INFO: Building....'
                 sh "echo 'User: ' ${params.username_}"
                 sh "echo 'Region: ' ${params.region_}"
-                sh "echo 'Env: ' ${params.env_}"
+                sh "echo 'Env: ' ${params.environment_}"
             }
         }
         stage('Test') {
@@ -61,7 +77,7 @@ pipeline {
                 ansiblePlaybook(
                   playbook: 'playbooks/playbook1.yml',
                   inventory: 'inventory/hosts',
-                  extras: '-e Region=${region_} -e Environment=${env_} -e Username=${username_}' )
+                  extras: '-e Region=${region_} -e Environment=${environment_} -e Username=${username_}' )
             }
         }
 
