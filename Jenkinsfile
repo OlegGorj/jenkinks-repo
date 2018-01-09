@@ -16,9 +16,6 @@ pipeline {
         choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region_')
 
         choice(name: 'RELEASE_AMI', choices: findAMIs(), description: 'What is the AMI?')
-
-
-
     }
     options {
         buildDiscarder(logRotator(numToKeepStr:'20'))
